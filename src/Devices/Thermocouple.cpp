@@ -5,7 +5,7 @@ void Thermocouple::setup() {
 }
 
 uint16_t Thermocouple::read() {
-    uint16_t temperature = analogRead(THERMOCOUPLE);
+    unsigned int temperature = analogRead(THERMOCOUPLE);
     return temperature;
 }
 

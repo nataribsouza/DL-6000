@@ -5,10 +5,7 @@
 #include <avr/io.h>
 
 #define THERMOCOUPLE 0
-#define RESOLUTION 1023
-#define VOLTAGE_REF 5
-#define ONE_HUNDRED_MARK 53
-#define CELSIUS_FACTOR 200
+#define READINGS_NUMBER 100
 
 class Thermocouple {
     public:

@@ -12,16 +12,24 @@
 #define MENU_NUMBER 3
 #define STANDBY 0
 #define WARMING_UP 1
-#define FINISHED 2 
+#define PROCESS_FINISHED 2 
 //============================
 
 //==== DEFINIÇÕES DAS TEMPERATURAS ====
 #define T100 54
+#define T150 106
 #define T140 94
 #define T180 135
 #define T200 156
-#define MAX_TEMPERATURE 156
-#define RST_TEMPERATURE 54
+#define T230 186
+#define T300 258
+#define T400 363
+#define MAX_TEMPERATURE 363
+#define RST_TEMPERATURE 106
+//======================================
+
+//==== DEFINIÇÃO TEMPO ATÉ DESLIGAR ====
+#define TURN_OF_TIMER 15000
 //======================================
 
 //==== DEFINIÇÕES DOS LED'S ====
@@ -43,14 +51,20 @@ class Controller{
         void loop();
     private:
         boolean wasMenuChanged = false;
+        boolean finishingProcess = false;
+        unsigned long int warmingUpTimer = 0;
+        unsigned int temperature = 0;
+
+        uint8_t verifyMaxTemperature();
         uint8_t menu = 0;
 
         uint8_t setLedCollor();
         void buttonHandler();
+        void readTemperature();
         void ledHandler();
         void standby();
         void warmingUp();
-        void finished();
+        void processFinished();
 };
 
 extern Controller controller;

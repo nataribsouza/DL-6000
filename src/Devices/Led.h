@@ -15,7 +15,7 @@ class Led {
         void turnAllOff();
         void blink(uint8_t led, uint16_t highTime, uint16_t lowTime);              //Função que faz o LED piscas
     private:                                                                       // Parâmetro 2: tempo do LED ligado
-        unsigned long ledTimer = 0;                                                // Parâmetro 3: tempo do LED desligado
+        unsigned long ledTimer = 0;
 
         boolean getLedLevel(uint8_t led);
 };
