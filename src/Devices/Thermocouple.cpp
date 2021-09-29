@@ -5,7 +5,14 @@ void Thermocouple::setup() {
 }
 
 uint16_t Thermocouple::read() {
-    unsigned int temperature = analogRead(THERMOCOUPLE);
+    unsigned long int temperature = 0;
+
+    for (uint8_t i = 0; i <= READINGS_NUMBER; i++) {
+        temperature += analogRead(THERMOCOUPLE);
+        delay(1);
+    }
+
+    temperature /= READINGS_NUMBER;
     return temperature;
 }
 

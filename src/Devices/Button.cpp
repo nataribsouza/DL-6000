@@ -9,7 +9,6 @@ boolean Button::read() {
 
     if (buttonLevel && !buttonPressed) {
         buttonCounter++;
-        delay(10);
     }
     if (buttonCounter >= 100 && !buttonPressed) {
         buttonPressed = true;

@@ -31,6 +31,14 @@ void Led::turnAllOff() {
 }
 
 void Led::blink(uint8_t led, uint16_t highTime, uint16_t lowTime) {
+    if (isLedOff() && (millis() - ledTimerHigh) >= lowTime) {
+        turnOn(led);
+        ledTimerLow = millis();
+    } else if (!isLedOff() && (millis() - ledTimerLow) >= highTime) {
+        turnAllOff();
+        ledTimerHigh = millis();
+    }
+
     if (!getLedLevel(led) && (millis() - ledTimer) >= lowTime) {
         turnOn(led);
         ledTimer = millis();
@@ -38,6 +46,11 @@ void Led::blink(uint8_t led, uint16_t highTime, uint16_t lowTime) {
         turnAllOff();
         ledTimer = millis();
     }
+}
+
+boolean Led::isLedOff() {
+    if ((PORTA.IN & ~RED) && (PORTA.IN & ~GREEN) && (PORTA.IN & ~BLUE)) return true;
+    else return false;
 }
 
 boolean Led::getLedLevel(uint8_t led) {

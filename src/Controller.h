@@ -17,19 +17,16 @@
 
 //==== DEFINIÇÕES DAS TEMPERATURAS ====
 #define T100 54
-#define T150 106
-#define T140 94
-#define T180 135
-#define T200 156
-#define T230 186
-#define T300 258
-#define T400 363
-#define MAX_TEMPERATURE 363
+#define T150 107
+#define T230 197
+#define T300 257
+#define T400 397
+#define MAX_TEMPERATURE 397
 #define RST_TEMPERATURE 106
 //======================================
 
 //==== DEFINIÇÃO TEMPO ATÉ DESLIGAR ====
-#define TURN_OF_TIMER 15000
+#define TURN_OF_TIMER 5000
 //======================================
 
 //==== DEFINIÇÕES DOS LED'S ====

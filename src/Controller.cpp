@@ -20,6 +20,10 @@ void Controller::standby() {
     buttonHandler();
     readTemperature();
     ledHandler();
+
+    led.turnOn(GREEN);
+    delay(2000);
+    led.turnAllOff();
 }
 
 
@@ -43,7 +47,6 @@ void Controller::processFinished() {
     buttonHandler();
     readTemperature();
     ledHandler();
-    if (thermocouple.read() <= RST_TEMPERATURE) menu = STANDBY;
 }
 
 void Controller::buttonHandler() {
@@ -70,7 +73,7 @@ void Controller::ledHandler() {
         switch (menu) {
             case STANDBY:             led.blink (GREEN, SMALL_BLINK, BIG_BLINK); break;
             case WARMING_UP:          led.blink (setLedCollor(), SMALL_BLINK, MEDIUM_BLINK); break; 
-            case PROCESS_FINISHED:    led.turnAllOff(); led.turnOn(setLedCollor()); break;
+            case PROCESS_FINISHED:    led.turnAllOff(); led.turnOn(RED); break;
         }
     }
 }
@@ -84,16 +87,16 @@ uint8_t Controller::verifyMaxTemperature() {
 }
 
 void Controller::readTemperature() {
-    temperature = thermocouple.read();
+    if (led.isLedOff()) temperature = thermocouple.read();
 }
 
 uint8_t Controller::setLedCollor() {
     if (temperature <= T150) {
         return BLUE;
-    } else if (temperature <= T230) {
-        return PURPLE;
-    } else if (temperature <= T300) {
+    } else if (temperature > T150 && temperature <= T230) {
         return YELLOW;
+    } else if (temperature > T230 && temperature <= T300) {
+        return PURPLE;
     } else {
         return RED;
     }
